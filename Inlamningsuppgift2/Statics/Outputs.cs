@@ -84,26 +84,46 @@ namespace Inlamningsuppgift2.Statics
         }
 
 
-        public static void UserLogin()
+        public static void UserLogin(string[] path)
         {
             bool loggedIn = default(bool);
             string error = default(string);
             
             do
             {
-                int cursorPos = 6;
+                Console.Clear();
+                Outputs.LogoPrint(path[0] + "logo.txt");
+                
                 if (!string.IsNullOrEmpty(error))
                 {
-                    cursorPos += 1;
-                    Console.SetCursorPosition(25, cursorPos);
+                    
+                    Console.SetCursorPosition(25, 7);
                     Console.WriteLine(error);
-                    cursorPos = 6;
+                    
                     error = default(string);
                 }
-                Console.SetCursorPosition(25, cursorPos);
+                Console.SetCursorPosition(25, 6);
+                var pass = default(string);
+                ConsoleKey key;
                 
                 Console.Write("Ange lösenordet$> ");
-                string loginCredentials = Console.ReadLine();
+                do
+                {
+                    var keyInfo = Console.ReadKey(intercept: true);
+                    key = keyInfo.Key;
+
+                    if (key == ConsoleKey.Backspace && pass.Length > 0)
+                    {
+                        Console.Write("\b \b");
+                        pass = pass[0..^1];
+                    }
+                    else if (!char.IsControl(keyInfo.KeyChar))
+                    {
+                        Console.Write("*");
+                        pass += keyInfo.KeyChar;
+                    }
+                } while (key != ConsoleKey.Enter);
+                string loginCredentials = pass;
 
                 switch (loginCredentials.ToLower())
                 {

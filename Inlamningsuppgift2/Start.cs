@@ -37,9 +37,9 @@ namespace Inlamningsuppgift2
                 
             }
             
-            //Därefter skrivs loggan ut
-            Outputs.LogoPrint(path[0]+"logo.txt");
-            Outputs.UserLogin();
+            //Därefter ombeds användaren att skriva in lösenordet
+            
+            Outputs.UserLogin(path);
         
         }
         
